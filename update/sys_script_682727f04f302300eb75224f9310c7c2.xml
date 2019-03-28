@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_58872_needit_needit</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Generate PDF</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	var pdf = new global.GeneralPdfUtils();
+	var attachmentSysId = '9351961d4f302300eb75224f9310c775';
+
+	var fieldsString = pdf.getPDFFields(attachmentSysId);
+	var fields = JSON.parse(fieldsString);
+	
+	var jsonObject = {
+		"adapter_ups_quantity":"1",
+		"asset_kind":"IT",
+		"asset_name":"Lenovo T460",
+		"asset_quantity":"1",
+		"asset_tag":"AI43242",
+		"attachment_id":"8c2c60894fb02300eb75224f9310c74f",
+		"backpack_quantity":"0",
+		"cable_lock_quantity":"1",
+		"coe_signature":"Ngoc Dang signed on 20-Sep-2018",
+		"current_status":"OK - Not Broken",
+		"deliver_to":"Do Quang Dinh",
+		"department":"GESM",
+		"employee_number":"012345678",
+		"from_date":"24-Sep-2018",
+		"hdd":"500GB",
+		"mouse_quantity":"1",
+		"network_cable_quantity":"1",
+		"office":"ETO",
+		"ram":"8GB",
+		"security_signature":"Nguyen Van A signed on 26-Sep-2018",
+		"sdm_signature":"QR Image",
+		"to_date":"24-Oct-2018"
+	};
+
+	var jsonString = JSON.stringify(jsonObject);
+
+	var destinationTableName = 'x_58872_needit_needit';
+	var destinationTableSysId = 'bc5a88e84f802300eb75224f9310c7a7';
+
+	var pdfName = 'asset_bring_in_out_completed.pdf';
+	
+	var fieldTypesString = pdf.getFieldType(attachmentSysId);
+	var fieldTypes = JSON.parse(fieldTypesString);
+	
+	pdf.prefillPdf(jsonString, destinationTableSysId, attachmentSysId, destinationTableName, pdfName);
+	
+	
+	//pdf.mergeImageToPdf(destinationTableName, destinationTableSysId, jsonString, attachmentSysId, pdfName, img);
+	
+	//gs.addInfoMessage(fields);
+
+	current.setAbortAction(true);
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-09-25 02:09:20</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>682727f04f302300eb75224f9310c7c2</sys_id>
+        <sys_mod_count>31</sys_mod_count>
+        <sys_name>Generate PDF</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_682727f04f302300eb75224f9310c7c2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-09-26 09:13:06</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=682727f04f302300eb75224f9310c7c2"/>
+</record_update>
